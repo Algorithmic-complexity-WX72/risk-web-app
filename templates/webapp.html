@@ -32,6 +32,19 @@
         font-size: 1.2rem;
         font-weight: bold;
     }
+    .inputt{
+        margin-bottom: 2rem;
+    }
+    
+    .second-column{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .first-column{
+        margin-top: 9rem;
+    }
+    
 </style>
 {#HTML PART#}
 <body>
@@ -55,19 +68,19 @@
                 
                 {#Inputs#}
                 <div class="inputs">
-                    <div class="first-input">
+                    <div class="first-input inputt">
                         <p>You start in: </p>
                         <input type="text" placeholder="name">
                     </div>
 
-                    <div class="second-input">
+                    <div class="second-input inputt">
                         <p>Write next planet name: </p>
                         <input type="text" placeholder="name">
                     </div>
                 </div>
                 
                 {#Button#}
-                <input type="submit" class="button is-success" value="Shortest way using Djkstra">
+                <input type="submit" class="button is-success third-input inputt" value="Shortest way using Djkstra">
                 
             </div>
             <div class="column second-column"> {# Columna derecha#}
