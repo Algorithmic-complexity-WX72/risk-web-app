@@ -43,6 +43,14 @@
     
     .first-column{
         margin-top: 9rem;
+        margin-left: 5rem;
+    }
+
+    .python-conex{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 18rem;
+        margin-left: 12rem;
     }
     
 </style>
@@ -53,10 +61,10 @@
         <div class="container-header" >
             <div class="navbar">
                 <h1 class="mr-1">RISK GAME</h1>
-    
+
                 <nav class="navigation">
-                    <a href="home.html" class="home_link"> HOME</a>
-                    <a href="webapp.html" class="webapp_link"> PLAY</a>
+                    <a href="http://localhost:8000/risk/home" class="home_link"> HOME</a>
+                    <a href="http://localhost:8000/risk/app" class="webapp_link"> PLAY</a>
                 </nav>
     
             </div>
@@ -83,9 +91,17 @@
                 <input type="submit" class="button is-success third-input inputt" value="Shortest way using Djkstra">
                 
             </div>
-            <div class="column second-column"> {# Columna derecha#}
-                <h2>Conquest the planet KAS-ASDGF </h2>
+            <div class="column second-column python-conex"> {# Columna derecha#}
+                <div class="title">
+                    <h2>Conquest the planet KAS-ASDGF </h2>
+                </div>
+
+                <div class="from-python">
+                    <p>{{ suma }}</p>
+                </div>
             </div>
+
+
         </div>
     
     </main>
