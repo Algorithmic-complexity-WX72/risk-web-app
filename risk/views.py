@@ -20,3 +20,11 @@ def app(request):
 def suma():
     trying = 1+2
     return trying
+
+# images on the fly, se genera en memoria
+#
+# plotly
+#
+# incrustar el svg, funcion de graphviz
+#
+# networkx a graphviz y luego a svg
