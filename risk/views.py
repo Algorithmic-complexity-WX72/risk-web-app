@@ -1,6 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
+
+# view to handle AJAX request
+
+@csrf_exempt
+def update_suma(request):
+    if request.method == 'POST':
+        a = request.POST.get('planetName')
+        result = suma(a)
+        return JsonResponse({'result': result})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
 
 
 # Create your views here.
@@ -12,13 +26,15 @@ def home(request):
 
     # return HttpResponse(f"result is {sumtotal}")
 def app(request):
-    app_value = suma()
+    a = request.GET.get('planetName', "1")
+    app_value = suma(a)
     templateApp = loader.get_template('webapp.html')
     context = {'suma' : app_value }
     return HttpResponse(templateApp.render(context, request))
 
-def suma():
-    trying = 1+2
+def suma(a):
+    a = int(a)
+    trying = a+2
     return trying
 
 # images on the fly, se genera en memoria

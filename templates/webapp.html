@@ -83,12 +83,12 @@
 
                     <div class="second-input inputt">
                         <p>Write next planet name: </p>
-                        <input type="text" placeholder="name">
+                        <input type="text" id="planetName" placeholder="name">
                     </div>
                 </div>
                 
                 {#Button#}
-                <input type="submit" class="button is-success third-input inputt" value="Shortest way using Djkstra">
+                <input type="submit" id="myButton" class="button is-success third-input inputt" value="Shortest way using Djkstra">
                 
             </div>
             <div class="column second-column python-conex"> {# Columna derecha#}
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="from-python">
-                    <p>{{ suma }}</p>
+                    <p id="pythonFunction" style="display: none;">{{ suma }}</p>
                 </div>
             </div>
 
@@ -106,4 +106,25 @@
     
     </main>
 </body>
+
+{#    JS PART    #}
+<script>
+    {#    action when I click the button   #}
+    document.getElementById("myButton").onclick = function (){
+        {#    store variable from input   #}
+        var planetName = document.getElementById("planetName").value;
+        {#    sending value input   #}
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/risk/update_suma", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function(){
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                console.log(this.responseText);
+            }
+        }
+        xhr.send("planetName = " + planetName);
+        {#    show  python function   #}
+        document.getElementById("pythonFunction").style.display = "block";
+    }
+</script>
 </html>
