@@ -11,6 +11,8 @@ from django.http import JsonResponse
 def update_suma(request):
     if request.method == 'POST':
         a = request.POST.get('planetName')
+        if a is None:
+            return JsonResponse({'error': 'Missing parameter: planetName'})
         result = suma(a)
         return JsonResponse({'result': result})
     else:
