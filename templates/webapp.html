@@ -76,6 +76,11 @@
                 
                 {#Inputs#}
                 <div class="inputs">
+
+                    {#Button#}
+                    <input type="submit" id="showPlanetsButton" class="button is-primary third-input inputt" value="Show Planets">
+                    
+
                     <div class="first-input inputt">
                         <p>You start in: </p>
                         <input type="text" placeholder="name">
@@ -88,7 +93,7 @@
                 </div>
                 
                 {#Button#}
-                <input type="submit" id="myButton" class="button is-success third-input inputt" value="Shortest way using Djkstra">
+                <input type="submit" id="djkstraButton" class="button is-success third-input inputt" value="Shortest way using Djkstra">
                 
             </div>
             <div class="column second-column python-conex"> {# Columna derecha#}
@@ -109,8 +114,17 @@
 
 {#    JS PART    #}
 <script>
+    
+    
+    
+    document.getElementById("showPlanetsButton").onclick = function (){
+        
+    }
+    
+    
+    
     {#    action when I click the button   #}
-    document.getElementById("myButton").onclick = function (){
+    document.getElementById("djkstraButton").onclick = function (){
         {#    store variable from input   #}
         var planetName = document.getElementById("planetName").value;
         {#    sending value input   #}
