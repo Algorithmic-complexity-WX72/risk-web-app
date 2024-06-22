@@ -103,6 +103,8 @@
 
                 <div class="from-python">
                     <p id="pythonFunction" style="display: none;">{{ suma }}</p>
+                    <img id="graphImage" src="" alt="Graph">
+{#                    <p id="graphFunction" style="display: none;">{{ show_graph }}</p>#}
                 </div>
             </div>
 
@@ -116,9 +118,25 @@
 <script>
     
     
-    
+
     document.getElementById("showPlanetsButton").onclick = function (){
-        
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/risk/show_graph", true);
+        xhr.onreadystatechange = function(){
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                var response = JSON.parse(this.responseText);
+                if(response.error){
+                    alert(response.error);
+                } else {
+                    if(response.svg_url !== undefined) {
+                        document.getElementById("graphImage").src = response.svg_url;
+                    } else {
+                        alert('SVG URL is undefined');
+                    }
+                }
+            }
+        }
+        xhr.send();
     }
     
     
