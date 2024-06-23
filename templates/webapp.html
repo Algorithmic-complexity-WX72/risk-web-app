@@ -80,20 +80,30 @@
                     {#Button#}
                     <input type="submit" id="showPlanetsButton" class="button is-primary third-input inputt" value="Show Planets">
                     
-
+{#                    Djkstra input and button#}
                     <div class="first-input inputt">
                         <p>You start in: </p>
-                        <input type="text" placeholder="name">
+                        <input type="text" id="startPlanet" placeholder="name">
                     </div>
 
                     <div class="second-input inputt">
-                        <p>Write next planet name: </p>
+                        <p>You start in: </p>
+                        <input type="text" id="endPlanet" placeholder="name">
+                    </div>
+
+
+                    <input type="submit" id="djkstraAlgorithm" class="button is-success third-input inputt" value="Shortest way using Djkstra">
+                    
+{#                    Add operation input and botton#}
+
+                    <div class="second-input inputt">
+                        <p>Sumaaaa: </p>
                         <input type="text" id="planetName" placeholder="name">
                     </div>
                 </div>
                 
                 {#Button#}
-                <input type="submit" id="djkstraButton" class="button is-success third-input inputt" value="Shortest way using Djkstra">
+                <input type="submit" id="djkstraButton" class="button is-success third-input inputt" value="Sumaaa">
                 
             </div>
             <div class="column second-column python-conex"> {# Columna derecha#}
@@ -139,6 +149,31 @@
         xhr.send();
         location.reload();
     }
+
+
+    {#Action that happen when I click the button#}
+    document.getElementById("djkstraAlgorithm").onclick = function (){
+        var startPlanet = document.getElementById("startPlanet").value;
+        var endPlanet = document.getElementById("endPlanet").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/risk/update_suma", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function(){
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                var response = JSON.parse(this.responseText);
+                if(response.error){
+                    alert(response.error);
+                } else {
+                    // Handle the response here
+                }
+            }
+        }
+        xhr.send("startPlanet=" + startPlanet + "&endPlanet=" + endPlanet);
+    }
+    
+    
     
     
     

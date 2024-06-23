@@ -126,6 +126,8 @@ def show_graph(request):
     dataset = "C:\\Users\\Janiel Franz\\Desktop\\UPC\\Algorithmic Complexity\\web-app-definitive\\djangoProject1\\risk\\names.csv"
     nodos_totales = 6
     mapa = generar_grafo(dataset, nodos_totales)
+    # guardando variable de mapa
+    request.session['mapa'] = mapa
     # draw the  planets
     svg_path = dibujar_grafo(mapa)
     #returns json response
