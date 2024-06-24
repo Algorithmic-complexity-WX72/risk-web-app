@@ -92,6 +92,7 @@ def dijkstra_union(mapa, startPlanet, endPlanet):
     # You can now use the variables distancias and caminos for further processing
     # For now, let's just return them
     # return distancias, caminos
+    dibujar_grafo_con_camino(mapa, caminos, endPlanet, 'grafo_coloreado')
     print("Dijkstra Union function executed successfully!")
 # Here I have to create a function to show the planets
 
@@ -176,6 +177,24 @@ def dibujar_grafo(G):
     print(f'SVG path in dibujar_grafo: {svg_path}')
     return svg_path
 
+def dibujar_grafo_con_camino(G, caminos, destino, nombre_archivo):
+    dot = graphviz.Digraph()
+
+    for node in G:
+        dot.node(node)
+
+    camino = caminos[destino] + [destino]
+
+    camino_set = set(zip(camino, camino[1:]))
+
+    for node in G:
+        for neighbor, weight in G[node].items():
+            if (node, neighbor) in camino_set or (neighbor, node) in camino_set:
+                dot.edge(node, neighbor, label=str(weight), color='red', penwidth='2')
+            else:
+                dot.edge(node, neighbor, label=str(weight))
+
+    dot.render(nombre_archivo, format='svg', view=True)
 
 
 def show_graph(request):
