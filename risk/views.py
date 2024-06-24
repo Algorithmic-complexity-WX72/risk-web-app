@@ -43,7 +43,7 @@ def dijkstra_union_view(request):
         global_mapa = None
         # mapa = request.session.get('mapa')
         #debugging purpouses
-        print(f"Mapa in dijkstra_union_view: {mapa}") #The problem is that this is null
+        print(f"Mapa in dijkstra_union_view: {mapa}") #The problem is that this is null (SOLVED)
         if startPlanet is None or endPlanet is None or mapa is None:
             return JsonResponse({'error': 'Missing parameters or session data'})
         result = dijkstra_union(mapa, startPlanet, endPlanet)
