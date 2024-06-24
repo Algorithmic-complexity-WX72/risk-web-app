@@ -36,6 +36,8 @@ def dijkstra_union_view(request):
         startPlanet = request.POST.get('startPlanet')
         endPlanet = request.POST.get('endPlanet')
         mapa = request.session.get('mapa')
+        #debugging purpouses
+        print(f"Mapa in dijkstra_union_view: {mapa}") #The problem is that this is null
         if startPlanet is None or endPlanet is None or mapa is None:
             return JsonResponse({'error': 'Missing parameters or session data'})
         result = dijkstra_union(mapa, startPlanet, endPlanet)
@@ -174,7 +176,9 @@ def show_graph(request):
     nodos_totales = 6
     mapa = generar_grafo(dataset, nodos_totales)
     # guardando variable de mapa
-    request.session['mapa'] = mapa
+    request.session['mapa'] = mapa #this is the problem
+    #debugging purpouses
+    print(f"Mapa in show_graph: {mapa}") #this is not null
     # draw the  planets
     svg_path = dibujar_grafo(mapa)
     #returns json response
