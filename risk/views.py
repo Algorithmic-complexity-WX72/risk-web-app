@@ -15,6 +15,9 @@ from django.templatetags.static import static
 
 # views to handle AJAX request
 
+#XDDD
+global_mapa = None
+
     #Suma
 @csrf_exempt
 def update_suma(request):
@@ -32,10 +35,12 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def dijkstra_union_view(request):
+    global global_mapa
     if request.method == 'POST':
         startPlanet = request.POST.get('startPlanet')
         endPlanet = request.POST.get('endPlanet')
-        mapa = request.session.get('mapa')
+        mapa = global_mapa
+        # mapa = request.session.get('mapa')
         #debugging purpouses
         print(f"Mapa in dijkstra_union_view: {mapa}") #The problem is that this is null
         if startPlanet is None or endPlanet is None or mapa is None:
@@ -113,6 +118,7 @@ def dijkstra(G, inicio, destino):
     return distancias, caminos
 
 def generar_grafo(csv_file, total_nodes):
+
     G = {}
     # Leer el archivo CSV y seleccionar nodos aleatorios
     with open(csv_file, 'r') as file:
@@ -172,11 +178,14 @@ def dibujar_grafo(G):
 
 
 def show_graph(request):
+    global global_mapa
     dataset = "C:\\Users\\Janiel Franz\\Desktop\\UPC\\Algorithmic Complexity\\web-app-definitive\\djangoProject1\\risk\\names.csv"
     nodos_totales = 6
     mapa = generar_grafo(dataset, nodos_totales)
+    global_mapa = mapa
+
     # guardando variable de mapa
-    request.session['mapa'] = mapa #this is the problem
+    # request.session['mapa'] = mapa #this is the problem
     #debugging purpouses
     print(f"Mapa in show_graph: {mapa}") #this is not null
     # draw the  planets
