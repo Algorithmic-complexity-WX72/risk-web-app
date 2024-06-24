@@ -35,9 +35,10 @@ def dijkstra_union_view(request):
     if request.method == 'POST':
         startPlanet = request.POST.get('startPlanet')
         endPlanet = request.POST.get('endPlanet')
-        if startPlanet is None or endPlanet is None:
-            return JsonResponse({'error': 'Missing parameters'})
-        result = dijkstra_union(startPlanet, endPlanet)
+        mapa = request.session.get('mapa')
+        if startPlanet is None or endPlanet is None or mapa is None:
+            return JsonResponse({'error': 'Missing parameters or session data'})
+        result = dijkstra_union(mapa, startPlanet, endPlanet)
         return JsonResponse({'result': result})
     else:
         return JsonResponse({'error': 'Invalid request method'})
@@ -77,7 +78,37 @@ def suma(a):
     trying = a+2
     return trying
 
+#UNION FUNCTION
+def dijkstra_union(mapa, startPlanet, endPlanet):
+    distancias, caminos = dijkstra(mapa, startPlanet, endPlanet)
+    # You can now use the variables distancias and caminos for further processing
+    # For now, let's just return them
+    # return distancias, caminos
+    print("Dijkstra Union function executed successfully!")
 # Here I have to create a function to show the planets
+
+#DJKSTRA
+
+def dijkstra(G, inicio, destino):
+    distancias = {nodo: float('inf') for nodo in G}
+    distancias[inicio] = 0
+    caminos = {nodo: [] for nodo in G}
+    visitados = set()
+
+    while len(visitados) < len(G):
+        no_visitados = {nodo: distancias[nodo] for nodo in G if nodo not in visitados}
+        if not no_visitados:
+            break
+        nodo_actual = min(no_visitados, key=no_visitados.get)
+        visitados.add(nodo_actual)
+
+        for vecino, peso in G[nodo_actual].items():
+            nueva_distancia = distancias[nodo_actual] + peso
+            if nueva_distancia < distancias[vecino]:
+                distancias[vecino] = nueva_distancia
+                caminos[vecino] = caminos[nodo_actual] + [nodo_actual]
+
+    return distancias, caminos
 
 def generar_grafo(csv_file, total_nodes):
     G = {}
