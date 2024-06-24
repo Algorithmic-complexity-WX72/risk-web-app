@@ -40,6 +40,7 @@ def dijkstra_union_view(request):
         startPlanet = request.POST.get('startPlanet')
         endPlanet = request.POST.get('endPlanet')
         mapa = global_mapa
+        global_mapa = None
         # mapa = request.session.get('mapa')
         #debugging purpouses
         print(f"Mapa in dijkstra_union_view: {mapa}") #The problem is that this is null
