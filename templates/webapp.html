@@ -83,12 +83,12 @@
 {#                    Djkstra input and button#}
                     <div class="first-input inputt">
                         <p>You start in: </p>
-                        <input type="text" id="startPlanet" placeholder="name">
+                        <input type="text" id="startPlanet" placeholder="inicio">
                     </div>
 
                     <div class="second-input inputt">
                         <p>You start in: </p>
-                        <input type="text" id="endPlanet" placeholder="name">
+                        <input type="text" id="endPlanet" placeholder="fin">
                     </div>
 
 
@@ -157,7 +157,7 @@
         var endPlanet = document.getElementById("endPlanet").value;
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/risk/update_suma", true);
+        xhr.open("POST", "/risk/dijkstra_union_view", true); // Change this to the URL of your Django view function
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         xhr.onreadystatechange = function(){

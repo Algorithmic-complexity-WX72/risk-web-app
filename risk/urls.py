@@ -9,6 +9,7 @@ urlpatterns =[
 
     #API
     path("risk/update_suma", views.update_suma, name="update_suma"),
-    path("risk/show_graph", views.ajax_show_graph, name="show_graph")
+    path("risk/show_graph", views.ajax_show_graph, name="show_graph"),
+    path('risk/dijkstra_union_view', views.dijkstra_union_view, name='dijkstra_union_view'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

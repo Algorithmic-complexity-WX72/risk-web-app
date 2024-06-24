@@ -28,6 +28,22 @@ def update_suma(request):
         return JsonResponse({'error': 'Invalid request method'})
 
 
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def dijkstra_union_view(request):
+    if request.method == 'POST':
+        startPlanet = request.POST.get('startPlanet')
+        endPlanet = request.POST.get('endPlanet')
+        if startPlanet is None or endPlanet is None:
+            return JsonResponse({'error': 'Missing parameters'})
+        result = dijkstra_union(startPlanet, endPlanet)
+        return JsonResponse({'result': result})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+
+
+
     #Show graph
 def ajax_show_graph(request):
     show_graph(request)
